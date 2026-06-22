@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Salesforce Login Test Suite" verbose="1" parallel="false">
+
+    <listeners>
+        <listener class-name="com.salesforce.framework.listeners.ExtentReportListener"/>
+    </listeners>
+
+    <test name="Valid Login Tests - Chrome">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="com.salesforce.tests.login.ValidLoginTest"/>
+        </classes>
+    </test>
+
+    <test name="Invalid Login Tests - Chrome">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="com.salesforce.tests.login.InvalidLoginTest"/>
+        </classes>
+    </test>
+
+    <!--
+    To run on Firefox or Edge, duplicate a <test> block and change the parameter value:
+    <parameter name="browser" value="firefox"/>
+    <parameter name="browser" value="edge"/>
+    -->
+
+</suite>
