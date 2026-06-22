@@ -14,7 +14,7 @@ AITESTERBLUEPRINT3X/
     ├── Notes.md
     ├── prompting_notes.md
     ├── RICE_POT.md
-    ├── templates/
+    ├── templates/                    ← 6 fill-in-the-blank prompt templates
     ├── Project2_Selenium_Framework/
     │   ├── blank-template-rice-pot.md
     │   └── AdvancedSeleniumFramework/
@@ -69,6 +69,9 @@ Ready-to-use, fill-in-the-blank prompts for common QA tasks.
 | 01 — Basic Test Case Generation (RTCFR) | `01_TestCaseGeneration+Prompt.md` | You have a feature and want test cases fast |
 | 02 — PRD → Comprehensive Test Cases | `02_TestCases_from_prd.md` | You have a PRD/BRD/Jira story to break down |
 | 03 — API Test Case Generation | `03_API_TestCase_Generation.md` | You have API docs or a Postman collection |
+| 04 — Negative Test Cases Only | `04_Negative_TC_Only.md` | You need to focus solely on error/failure paths |
+| 05 — Security Test Cases | `05_Security_Test.md` | You need OWASP Top 10 / security coverage |
+| 06 — Regression Test Suite | `06_Regression_Suite.md` | You need a full regression suite with priorities and time estimates |
 
 All templates enforce the anti-hallucination constraints: only documented behavior, explicit "Not specified" for gaps, no invented error codes or endpoints.
 
