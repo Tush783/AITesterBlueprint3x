@@ -38,4 +38,16 @@ Each chapter builds upon the previous one. Start with Chapter 01 for foundationa
 
 ---
 
-**Last Updated:** 2026-06-15
+## How to Contribute
+
+- **Report issues:** Open an issue describing the problem or suggestion.
+- **Pull requests:** Fork the repo, create a feature branch, and submit a PR.
+- **Tests:** Add or update tests when contributing code changes.
+
+## License
+
+This project is released under the MIT License. See LICENSE.md for details.
+
+---
+
+**Last Updated:** 2026-06-22
