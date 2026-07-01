@@ -1,0 +1,19 @@
+# Secrets
+.env
+
+# Python
+backend/__pycache__/
+backend/**/__pycache__/
+backend/venv/
+backend/.venv/
+*.pyc
+
+# Ephemeral workbench (Layer 3 intermediates)
+backend/.tmp/
+
+# Delivered payloads (generated locally, not source)
+backend/output/*.xlsx
+
+# Node / React
+frontend/node_modules/
+frontend/dist/

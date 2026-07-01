@@ -9,18 +9,26 @@ A comprehensive learning resource and hands-on automation framework for AI-assis
 ```
 AITESTERBLUEPRINT3X/
 ├── chapter_01_LLM_Basics/
-└── chapter_02_Prompt_Eng/
-    ├── Anti_Hallucinations_Rules.md
-    ├── Notes.md
-    ├── prompting_notes.md
-    ├── RICE_POT.md
-    ├── templates/                    ← 6 fill-in-the-blank prompt templates
-    ├── Project2_Selenium_Framework/
-    │   ├── blank-template-rice-pot.md
-    │   └── AdvancedSeleniumFramework/
-    └── Project3_APITest_Framework/
-        ├── rest-assured-framework-rice-pot-prompt.md
-        └── Rest_assured_API_testing_framework/
+├── chapter_02_Prompt_Eng/
+│   ├── Anti_Hallucinations_Rules.md
+│   ├── Notes.md
+│   ├── prompting_notes.md
+│   ├── RICE_POT.md
+│   ├── templates/                    ← 6 fill-in-the-blank prompt templates
+│   ├── Project2_Selenium_Framework/
+│   │   ├── blank-template-rice-pot.md
+│   │   └── AdvancedSeleniumFramework/
+│   └── Project3_APITest_Framework/
+│       ├── rest-assured-framework-rice-pot-prompt.md
+│       └── Rest_assured_API_testing_framework/
+└── chapter_03_BLAST_Framework/
+    ├── B.L.A.S.T.md               ← the protocol itself
+    ├── objective.md
+    ├── claude.md                  ← project constitution (schema + rules)
+    ├── task_plan.md / findings.md / progress.md
+    ├── architecture/              ← Layer 1 SOPs
+    ├── backend/                   ← Layer 2 (Navigation) + Layer 3 (Tools)
+    └── frontend/                  ← React (Vite) UI
 ```
 
 ---
@@ -205,6 +213,63 @@ Configure these secrets in your GitHub repo settings:
 
 ---
 
+## Chapter 03 — B.L.A.S.T. Framework: ADO Test Plan Generator
+
+**Location:** `chapter_03_BLAST_Framework/`
+
+An end-to-end tool built with the **B.L.A.S.T.** protocol (Blueprint, Link, Architect, Stylize, Trigger): fetches User Stories from an Azure DevOps board by ID and generates a structured, traceable test plan (positive / negative / edge cases per Acceptance Criterion) as a downloadable `.xlsx`.
+
+**Stack:** Python 3 · FastAPI · `azure-devops` SDK · openpyxl · React 18 (Vite)
+
+```
+chapter_03_BLAST_Framework/
+├── claude.md                      ← Project Constitution: data schema + behavioral rules
+├── .env.example                   ← required config keys (copy to .env with real values)
+├── architecture/                  ← Layer 1: SOPs for each tool
+│   ├── fetch_user_story.md
+│   ├── generate_test_plan.md
+│   ├── export_xlsx.md
+│   └── navigation.md
+├── backend/                       ← Layer 2 (Navigation) + Layer 3 (Tools)
+│   ├── main.py                    ← FastAPI routes
+│   ├── config.py
+│   └── tools/
+│       ├── ado_client.py          ← fetch a User Story from Azure DevOps
+│       ├── test_plan_generator.py ← deterministic, rule-based test case generator (no LLM call)
+│       ├── xlsx_export.py         ← writes the final .xlsx deliverable
+│       └── verify_connection.py   ← Phase 2 Link handshake script
+├── frontend/                      ← Layer 4: lightweight React (Vite) UI
+└── run_dev.ps1                    ← one-command local launcher (backend + frontend)
+```
+
+Test case generation is intentionally **rule-based, not LLM-based** — Acceptance Criteria are matched against a keyword→scenario table (email, password, permissions, file upload, numeric bounds, dates, etc.) using standard QA test-design heuristics (equivalence partitioning, boundary value analysis), so output stays deterministic and traceable back to the source story.
+
+#### Run locally
+
+```powershell
+# 1. Fill in real values
+cd chapter_03_BLAST_Framework
+copy .env.example .env   # then edit ADO_ORG_URL, ADO_PROJECT, ADO_PAT
+
+# 2. First-time setup
+cd backend; python -m venv venv; venv\Scripts\pip install -r requirements.txt; cd ..
+cd frontend; npm install; cd ..
+
+# 3. Run both servers
+.\run_dev.ps1
+```
+
+Backend: `http://127.0.0.1:8000` · Frontend: `http://127.0.0.1:5173`
+
+Sanity-check the Azure DevOps connection before generating anything:
+```powershell
+backend\venv\Scripts\python backend\tools\verify_connection.py <a_real_story_id>
+```
+
+Currently a local-only tool by design — no cloud deployment target has been requested yet.
+
+---
+
 ## Getting Started
 
 1. Clone the repo
@@ -212,6 +277,7 @@ Configure these secrets in your GitHub repo settings:
 3. Read `chapter_02_Prompt_Eng/RICE_POT.md` and `Anti_Hallucinations_Rules.md`
 4. Use the templates in `templates/` to generate test cases with your AI tool
 5. Run Project 2 (Selenium) or Project 3 (REST Assured) with `mvn clean test`
+6. Run Chapter 03 (B.L.A.S.T. Test Plan Generator) per the instructions in `chapter_03_BLAST_Framework/`
 
 ---
 
@@ -227,4 +293,4 @@ This project is released under the MIT License. See `LICENSE.md` for details.
 
 ---
 
-**Last Updated:** 2026-06-22
+**Last Updated:** 2026-07-01
